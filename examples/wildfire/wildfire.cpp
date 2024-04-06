@@ -3,6 +3,11 @@
 
 #include "wildfire.hpp"
 
+#include <filesystem>
+#include <iostream>
+
+namespace fs = std::filesystem;
+
 int main() {
     ads::dim_config dim{2, 200, 0.0, 100.0};
     ads::timesteps_config steps{10000, 1e-3};
