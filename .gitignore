@@ -5,6 +5,7 @@
 
 # Build directory
 /*build*/
+deps/
 
 # IDE files
 /.idea/
