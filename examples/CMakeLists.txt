@@ -71,6 +71,10 @@ add_example(validation GALOIS
 add_example(pollution GALOIS
   SRC
   pollution/main.cpp)
+  
+add_example(pollution2
+  SRC
+  pollution2/pollution.cpp)  
 
 add_example(pollution_dpg GALOIS
   SRC
