@@ -60,8 +60,8 @@ private:
         const double d = 0.7;
         const double c = 10000;
         s = std::max(((cos(iter * 3.14159265358979 / c) - d) * 1 / (1 - d)), 0.);
-        std::cout << "\r" << iter << "/" << iterations << " (s=" << s
-                  << ")                          \r";
+        // std::cout << "\r" << iter << "/" << iterations << " (s=" << s
+        //           << ")                          \r";
     }
 
     void step(int iter, double /*t*/) override {
@@ -103,7 +103,7 @@ private:
             double t = clock(iter, t_begin, t_end);
             if (t == 0)
                 return 0;
-            return 300 * (y - 1) * sin(3.14 * x) * t;
+            return 300 * (y - 1) * max(sin(-3 * 3.14 * x), 0) * t;
         }
         return 0;
     }
@@ -119,6 +119,16 @@ private:
     void compute_rhs(int iter) {
         auto& rhs = u;
 
+        int t_begin = 0; 
+        int t_end = 0;
+
+        // if (iter > 1000) {
+        t_begin = 2000 * ((iter) / 2000);
+        t_end = 1000 + 2000 * ((iter) / 2000);
+        // }
+
+        // std::cout << t_begin << " " << t_end << "\n";
+
         zero(rhs);
         for (auto e : elements()) {
             double J = jacobian(e);
@@ -131,9 +141,6 @@ private:
                     double gradient_prod = k_x * u.dx * v.dx + k_y * u.dy * v.dy;
                     double h = e2h(e[1]);
                     auto p = point(e, q);
-
-                    int t_begin = 1000 + 2000 * ((iter - 1000) / 2000);
-                    int t_end = 2000 + 2000 * ((iter - 2000) / 2000);
 
                     double val =
                         u.val * v.val - steps.dt * gradient_prod

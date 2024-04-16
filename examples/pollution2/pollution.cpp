@@ -4,6 +4,9 @@
 #include "pollution.hpp"
 
 int main() {
+    // if (argc > 1) {
+    //     dt = std::stod(argv[1]);
+    // }
     ads::dim_config dim{2, 40};
     ads::timesteps_config steps{iterations, 1e-5};
     int ders = 1;
