@@ -99,13 +99,13 @@ private:
     }
 
     double cannon(double x, double y, int iter, int t_begin, int t_end) {
-        if (x > 0.2 && x < 0.8) {
+        // if (x > 0.2 && x < 0.8) {
             double t = clock(iter, t_begin, t_end);
             if (t == 0)
                 return 0;
-            return 300 * (y - 1) * max(sin(-3 * 3.14 * x), 0) * t;
-        }
-        return 0;
+            return 300 * (y - 1) * max(sin(-33 * 3.14 * x), 0) * t;
+        // }
+        // return 0;
     }
 
     // double cannon(double x, double y, double t) {
@@ -144,7 +144,7 @@ private:
 
                     double val =
                         u.val * v.val - steps.dt * gradient_prod
-                        + steps.dt * (dTy(h) + cannon(p[0], p[1], iter, t_begin, t_end)) * u.dy * v.val
+                        + steps.dt * (cannon(p[0], p[1], iter, t_begin, t_end)) * u.dy * v.val
                         + steps.dt * f(h) * v.val;
                     rhs(a[0], a[1]) += val * w * J;
                 }
